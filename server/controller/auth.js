@@ -26,7 +26,42 @@ class Auth {
       res.status(404);
     }
   }
-
+  async changePassword(req, res) {
+    const { email, password, confirmPassword } = req.body;
+    let error = {};
+  
+    if (password !== confirmPassword) {
+      error = {
+        ...error,
+        password: "New password and confirm password must match",
+        confirmPassword: "New password and confirm password must match",
+      };
+      return res.json({ error });
+    }
+  
+    try {
+      const user = await userModel.findOne({ email });
+      if (!user) {
+        error = {
+          ...error,
+          email: "User with this email does not exist",
+        };
+        return res.json({ error });
+      }
+  
+      const hashedPassword = bcrypt.hashSync(password, 10);
+  
+      await userModel.findByIdAndUpdate(user._id, { password: hashedPassword });
+  
+      return res.json({
+        success: "Password updated successfully",
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+  }
+  
   /* User Registration/Signup controller  */
   async postSignup(req, res) {
     let { name, email, password, cPassword, verified, userRole } = req.body;

@@ -44,7 +44,8 @@ router.post("/password-reset", async (req, res) => {
         }).save();
       }
 
-      const message = `${process.env.WEB}/password-reset/${user._id}/${token.token}`;
+      // const message = `${process.env.WEB}/password-reset/${user._id}/${token.token}`;
+      const message = `${process.env.WEBFRONT}/change-password`;
       await sendEmail(user.email, "Password reset", message, "reset");
 
       res.send("Password reset link sent to your email account");
