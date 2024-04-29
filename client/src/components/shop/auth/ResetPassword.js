@@ -19,11 +19,11 @@ const FResetPassword = (props) => {
   const pathArray = path.split("/");
   const userId = pathArray[2];
   const token = pathArray[3];
-
+  const email = localStorage.getItem("email");
   async function FindUser(userId, token) {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/users/password-reset/${userId}/${token}`
+        `http://localhost:8000/api/users/password-reset/${userId}/${token}`
       );
 
       if (response.status === 200) {
@@ -40,13 +40,16 @@ const FResetPassword = (props) => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/users/password-reset/${userId}/${token}`,
-        { password }
+        `http://localhost:8000/api/changepassword`,
+        { email:email,
+          password:  password,
+          confirmPassword :confirmPassword}
       );
-
-      if (response.status === 200) {
-        const message = response.data;
-        if (message === "Password reset sucessfully") {
+      console.log(response.status,response)
+      localStorage.removeItem("email")
+      if (response.status == 200) {
+        const message = response.data.success;
+        if (message === "Password updated successfully") {
           setMessage("Password reset sucessfully");
           isloading(false);
           setTimeout(() => {
@@ -93,7 +96,7 @@ const FResetPassword = (props) => {
 
   return (
     <>
-      {ismessage === "Invalid link or expired" ? (
+      {email === undefined ? (
         <div className="flex flex-col items-center justify-center mt-40">
           <span>
             <svg
@@ -115,10 +118,7 @@ const FResetPassword = (props) => {
             {ismessage}
           </span>
         </div>
-      ) : (
-        ""
-      )}
-      {ismessage === "User password can be modified" ? (
+      ) :  (
         <>
         <div className="flex flex-col items-center justify-center mt-40 my-10">
         <h2 className="text-2xl sm:text-3xl mb-2 font-semibold">Reset Password</h2>
@@ -197,11 +197,9 @@ const FResetPassword = (props) => {
           </form>
         </div>
         </>
-      ) : (
-        ""
-      )}
+          )}
     </>
-  );
+        )
 };
 
 const ResetPassword = (props) => {

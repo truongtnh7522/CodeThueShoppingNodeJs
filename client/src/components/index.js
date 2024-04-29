@@ -25,6 +25,7 @@ const Routes = (props) => {
       <Switch>
         {/* Shop & Public Routes */}
         <Route exact path="/" component={Home} />
+        <Route exact path="/changepw" component={ResetPassword} />
         <Route exact path="/verify/:id/:token" component={Verify} />
         <Route
           exact

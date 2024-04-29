@@ -58,8 +58,8 @@ const Login = (props) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/users/password-reset`,
-        { email }
+        "http://localhost:8000/api/users/password-reset",
+        { email : email }
       );
       if (response.data) {
         setError(response.data);
@@ -67,6 +67,7 @@ const Login = (props) => {
           setError(false);
         }, 5000);
         setloading(false);
+        localStorage.setItem("email", email);
         if (
           response.data === "Password reset link sent to your email account"
         ) {

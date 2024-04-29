@@ -44,7 +44,7 @@ const Footer = (props) => {
             </a>
            
             {/* Location link */}
-            <a href="https://www.google.com/maps/place/Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+S%C6%B0+ph%E1%BA%A1m+K%E1%BB%B9+thu%E1%BA%ADt+Th%C3%A0nh+ph%E1%BB%91+H%E1%BB%93+Ch%C3%AD+Minh/@10.8506324,106.7693382,17z/data=!3m1!4b1!4m6!3m5!1s0x31752763f23816ab:0x282f711441b6916f!8m2!3d10.8506324!4d106.7719131!16s%2Fm%2F02pz17z?hl=vi-VN&entry=ttu" className="text-gray-500  hover:text-white">
+            <a href="https://www.google.com/maps" className="text-gray-500  hover:text-white">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v.01M12 18v.01M12 6c-3.87 0-7 3.134-7 7 0 3.87 3.13 7 7 7 3.866 0 7-3.13 7-7 0-3.866-3.134-7-7-7zM2 12h.01M22 12h.01"/>
                 <circle cx="12" cy="12" r="10" fill="none" />
